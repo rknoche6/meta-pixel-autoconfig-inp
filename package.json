@@ -1,0 +1,14 @@
+{
+  "name": "pixel-inp-test",
+  "version": "1.0.0",
+  "description": "Measures the INP cost of the Meta Pixel's default autoConfig click listener",
+  "scripts": {
+    "build": "node gen.mjs",
+    "measure": "node measure.mjs"
+  },
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "puppeteer-core": "^23.11.1"
+  }
+}
