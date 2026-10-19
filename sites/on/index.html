@@ -20,6 +20,14 @@ nav.crumbs{color:var(--muted);font-size:14px;margin:8px 0}
 #hud{position:fixed;left:0;right:0;bottom:0;background:#111;color:#eee;font:13px/1.4 ui-monospace,monospace;padding:10px 16px;max-height:170px;overflow:auto;z-index:9}
 #hud b{color:#fff}#hud .bad{color:#ff8a80}#hud .ok{color:#9be29b}
 </style>
+<script>
+// Count SubscribedButtonClick. Small events go out as GET image requests (seen via Resource Timing below);
+// large ones, like these with the scraped JSON-LD, are POSTed by submitting a hidden form, which Resource Timing misses.
+window.__sbc=0;
+(function(submit){HTMLFormElement.prototype.submit=function(){var ev=this.querySelector("[name=ev]");
+  if(String(this.action).indexOf("facebook.com/tr")>=0&&ev&&ev.value==="SubscribedButtonClick")window.__sbcHit();return submit.apply(this,arguments);};})(HTMLFormElement.prototype.submit);
+window.__sbcHit=function(){__sbc++;var el=document.getElementById("sbc");if(el)el.textContent=__sbc;};
+</script>
 <!-- Meta Pixel. The ONLY difference between the two test sites is the autoConfig line. -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
@@ -368,8 +376,8 @@ new PerformanceObserver(function(list){list.getEntries().forEach(function(en){
   var row=document.createElement("div");row.innerHTML='<span class="'+cls(en.duration)+'">'+Math.round(en.duration)+' ms</span> '+lbl.replace(/</g,"&lt;");
   log.prepend(row);
 });}).observe({type:"event",durationThreshold:16,buffered:true});
-// Count SubscribedButtonClick beacons/requests to facebook.com/tr.
-var sbc=0;new PerformanceObserver(function(l){l.getEntries().forEach(function(r){if(/facebook\.com\/tr/.test(r.name)&&/ev=SubscribedButtonClick/.test(r.name)){sbc++;document.getElementById("sbc").textContent=sbc;}});}).observe({type:"resource",buffered:true});
+// SubscribedButtonClick sent as GET requests.
+new PerformanceObserver(function(l){l.getEntries().forEach(function(r){if(/facebook\.com\/tr/.test(r.name)&&/ev=SubscribedButtonClick/.test(r.name))__sbcHit();});}).observe({type:"resource",buffered:true});
 </script>
 <script>
 // fbevents.js replaces the "2.0" stub version once it runs. If it never does, an ad/tracking blocker stopped it
