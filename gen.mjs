@@ -80,7 +80,7 @@ fbq("track","ViewContent",{content_type:"product",content_ids:["RTR-4711"]});
 <script type="application/ld+json">${jsonld}</script>
 <script type="application/ld+json">${breadcrumbs}</script>
 </head><body><main itemscope itemtype="https://schema.org/Product">
-<p><span class="badge">${label}</span> · compare: <a href="https://${autoConfigOff ? "pixel-on" : "pixel-off"}.dontdielabs.com/">${autoConfigOff ? "autoConfig ON" : "autoConfig OFF"}</a></p>
+<p><span class="badge">${label}</span> · compare: <a href="https://${autoConfigOff ? "pixel-on" : "pixel-off"}.dontdielabs.com/">${autoConfigOff ? "autoConfig ON" : "autoConfig OFF"}</a> · code: <a href="https://github.com/rknoche6/meta-pixel-autoconfig-inp">github.com/rknoche6/meta-pixel-autoconfig-inp</a></p>
 <nav class="crumbs"><a href="#">Shoes</a> › <a href="#">Running</a> › <a href="#">Trail</a> › Ridgeline Trail Runner</nav>
 <h1>Ridgeline Trail Runner</h1>
 <p>Tap buttons, links and images below. The black bar shows each interaction's duration (Event Timing API) and the page INP (web-vitals). For realistic numbers use a mid-range Android phone, or Chrome DevTools with 4× CPU throttling.</p>
